@@ -19,6 +19,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 
+// List of available country codes for the phone number input
 const countryCodes = [
   { code: '+91', label: 'India' },
   { code: '+1', label: 'USA' },
@@ -26,6 +27,7 @@ const countryCodes = [
 ];
 
 const Signup = () => {
+// State for storing form input values
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
@@ -33,13 +35,16 @@ const Signup = () => {
     countryCode: '+91',
   });
 
+  // State for tracking validation errors 
   const [errors, setErrors] = useState({});
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  // Clear any existing local storage data on component mount
    useEffect(() => {
     localStorage.clear();
   }, []);
 
+  // Validation function for all input fields
   const validate = () => {
     const newErrors = {};
 
@@ -65,12 +70,14 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Handle input change for all form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -89,6 +96,7 @@ const Signup = () => {
     setOpenSnackbar(false);
   };
 
+   // Render the UI
   return (
     <>
       <Box
@@ -121,6 +129,7 @@ const Signup = () => {
             <form onSubmit={handleSubmit} noValidate>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
+                    {/* Username Field */}
                   <TextField
                     required
                     fullWidth
@@ -187,7 +196,7 @@ const Signup = () => {
                     }}
                   />
                 </Grid>
-
+                {/* Email Field */}
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -211,7 +220,7 @@ const Signup = () => {
                   />
                 </Grid>
               </Grid>
-
+              {/* Submit Button */}
               <Box textAlign="center" mt={4}>
                 <Button
                   type="submit"
